@@ -13,7 +13,6 @@ public class Jogador {
     }
 
     public void receberCarta(Carta carta){
-        System.out.println(carta);
         cartas.add(carta);
         if(carta.getNumero() > 10){
             pontos += 10;

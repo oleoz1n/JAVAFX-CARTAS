@@ -17,17 +17,28 @@ public class Jogo {
     public Computador getComputador() {
         return computador;
     }
-    public Carta distribuiCartaParaJogador(){
-        if(!jogador.parou()){
-            return monte.virar();
+    public Carta distribuiCartaParaJogador(Jogador player){
+        if(!jogador.parou() || !computador.parou() ){
+            var carta = monte.virar();
+            player.receberCarta(carta);
+            return carta;
         }
         return null;
     }
     public boolean acabou(){
-        if(jogador.getPontos() > 21 || computador.getPontos() > 21 ||jogador.parou() || computador.parou()){
+        if(jogador.getPontos() > 21 || computador.getPontos() > 21 || jogador.parou() && computador.parou()){
              return true;
         }
         return false;
+    }
+    public void setMonte(Monte monte) {
+        this.monte = monte;
+    }
+    public void setJogador(Jogador jogador) {
+        this.jogador = jogador;
+    }
+    public void setComputador(Computador computador) {
+        this.computador = computador;
     }
     public String resultado(){
         if(jogador.getPontos() > computador.getPontos() && jogador.getPontos() <= 21){
@@ -46,4 +57,5 @@ public class Jogo {
             return "Ganhou";
         }
     }
+
 }

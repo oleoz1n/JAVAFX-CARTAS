@@ -18,9 +18,21 @@ public class PrimaryController {
     private Jogo jogo;
 
     public void turno(){
-        if(!jogo.jogador.parou() || !jogo.acabou()){
-            jogo.distribuiCartaParaJogador();
+        jogo.acabou();
+        if(!jogo.jogador.parou() && !jogo.acabou()){
+            jogo.distribuiCartaParaJogador(jogo.getJogador());
         }
+        if(!jogo.computador.parou() && !jogo.acabou()){
+            if(jogo.jogador.parou() && jogo.computador.getPontos() < jogo.jogador.getPontos()){
+                while(jogo.computador.getPontos() < jogo.jogador.getPontos()){
+                    jogo.distribuiCartaParaJogador(jogo.getComputador());
+                }
+            }
+            else{
+                jogo.distribuiCartaParaJogador(jogo.getComputador());
+            }
+        }
+        atualizar();
     }
 
     public void atualizar(){
@@ -32,6 +44,9 @@ public class PrimaryController {
 
         jogo.jogador.getCartas().forEach((carta) -> mesaDoJogador.getChildren().add(imagemCarta(carta)));
         jogo.computador.getCartas().forEach((carta) -> mesaDoComputador.getChildren().add(imagemCarta(carta)));
+        if(jogo.acabou()){
+            resultado.setText(jogo.resultado());
+        }
     }
 
     public void novoJogo(){
@@ -44,12 +59,16 @@ public class PrimaryController {
     }
 
     public void pedirCarta(){
-       turno();
+        if(jogo.acabou() == false){
+            turno();
+        }
     }
 
     public void parar(){
-        jogo.jogador.parar();
-        turno();
+        if(jogo.acabou() == false){
+            jogo.jogador.parar();
+            turno();
+        }
     }
     
 
