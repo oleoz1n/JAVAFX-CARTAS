@@ -17,7 +17,7 @@ public class Carta {
         }
         
         else if (numero == 12){
-            return    "classic-cards/Queen"+this.naipe+" .png";
+            return    "classic-cards/Queen"+this.naipe+".png";
         }
         else if (numero==13){
             return     "classic-cards/King"+this.naipe+".png";
@@ -26,6 +26,12 @@ public class Carta {
             return      "classic-cards/" + numero+""+this.naipe+".png";}
         }
 
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    public void setNaipe(Naipe naipe) {
+        this.naipe = naipe;
+    }
     public int getNumero() {
         return numero;
     }

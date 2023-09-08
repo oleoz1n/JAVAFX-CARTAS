@@ -1,6 +1,8 @@
 package com.example;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -59,8 +61,24 @@ public class PrimaryController {
     }
 
     public void pedirCarta(){
+        if(jogo == null){
+        Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Alerta");
+            alert.setHeaderText("Jogo não iniciado");
+            alert.setContentText("Inicie um novo jogo");
+            alert.showAndWait();
+            }
+        else{
         if(jogo.acabou() == false){
             turno();
+        }
+        else{
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Alerta");
+            alert.setHeaderText("Jogo finalizado");
+            alert.setContentText("Inicie um novo jogo");
+            alert.showAndWait();
+        }
         }
     }
 
